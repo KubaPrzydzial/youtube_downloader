@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox, filedialog
-from tkinter import ttk
 from pytube import YouTube, Playlist
 
 
