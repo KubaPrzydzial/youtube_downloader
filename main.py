@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox, filedialog
+from tkinter.messagebox import showinfo
 from pytube import YouTube, Playlist
 
 
@@ -15,15 +16,16 @@ def link_download():
     Youtube_link = video_Link.get()
     download_folder = download_Path.get()
     getVideo = YouTube(Youtube_link)
-    getVideo.register_on_progress_callback(show_progress_bar)
     videoStream = getVideo.streams.filter(progressive = True, file_extension='mp4').order_by('resolution').desc().first().download(download_folder)
+    showinfo(message='Progress complete!')
 
 def playlist_download():
     Youtube_link_playlist = playlist_link.get()
     download_folder = download_Path.get()
-    getPlaylist = YouTube(Youtube_link_playlist, on_progress_callback=progress_Check)
+    getPlaylist = Playlist(Youtube_link_playlist)
     for video in getPlaylist.videos:
         video.streams.filter(progressive=True, file_extension="mp4").order_by('resolution').desc().first().download(download_folder)
+    showinfo(message='Progress complete!')
 
 def widgets():
 
